@@ -4,34 +4,43 @@ pipeline {
 
     stages {
 
-        stage('Clone Repository') {
+        stage('Checkout Code') {
 
             steps {
-                echo 'Cloning repository...'
-                sleep 2
+
+                git branch: 'main',
+                url: 'https://github.com/Shreyas-Hegde12/ci-cd-demo'
             }
         }
 
         stage('Install Dependencies') {
 
             steps {
-                echo 'Installing npm packages...'
-                sleep 2
+
+                dir('app') {
+
+                    sh 'npm install'
+                }
             }
         }
 
         stage('Run Tests') {
 
             steps {
-                echo 'Running application tests...'
-                sleep 2
+
+                dir('app') {
+
+                    sh 'npm test'
+                }
             }
         }
 
         stage('Build Docker Image') {
 
             steps {
-                echo 'Building docker image...'
+
+                echo 'Building Docker image...'
+
                 sleep 2
             }
         }
@@ -39,7 +48,9 @@ pipeline {
         stage('Deploy Application') {
 
             steps {
-                echo 'Deploying application...'
+
+                echo 'Deploying Docker containers...'
+
                 sleep 2
             }
         }
@@ -48,10 +59,12 @@ pipeline {
     post {
 
         success {
-            echo 'Deployment Successful'
+
+            echo 'CI/CD Pipeline Completed Successfully'
         }
 
         failure {
+
             echo 'Pipeline Failed'
         }
     }

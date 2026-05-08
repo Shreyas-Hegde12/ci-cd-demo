@@ -10,7 +10,7 @@ describe("Node.js CI/CD Demo App", () => {
 
     expect(response.statusCode).toBe(200);
 
-    expect(response.body.message).toBe("CI/CD Pipeline Working");
+    expect(response.body.message).toBe("this is a working web app");
 
     expect(response.body.status).toBe("success");
   });
