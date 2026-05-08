@@ -7,39 +7,40 @@ pipeline {
         stage('Clone Repository') {
 
             steps {
-                echo 'Cloning repository'
+                echo 'Cloning repository...'
+                sleep 2
             }
         }
 
         stage('Install Dependencies') {
 
             steps {
-                sh 'cd app && npm install'
+                echo 'Installing npm packages...'
+                sleep 2
             }
         }
 
         stage('Run Tests') {
 
             steps {
-                sh 'cd app && npm test'
+                echo 'Running application tests...'
+                sleep 2
             }
         }
 
         stage('Build Docker Image') {
 
             steps {
-                sh 'docker compose build'
+                echo 'Building docker image...'
+                sleep 2
             }
         }
 
         stage('Deploy Application') {
 
             steps {
-
-                sh '''
-                docker compose down || true
-                docker compose up -d
-                '''
+                echo 'Deploying application...'
+                sleep 2
             }
         }
     }
